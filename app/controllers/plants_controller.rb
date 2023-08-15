@@ -23,4 +23,23 @@ class PlantsController < ApplicationController
   def plant_params
     params.permit(:name, :image, :price, :is_in_stock)
   end
+
+  def update
+    @plant = Plant.find(params[:id])
+  
+    if @plant.update(plant_params)
+      render :show
+    else
+      render :edit
+    end
+  end  
+  
+  def destroy
+    @plant = Plant.find(params[:id])
+    @plant.destroy
+  
+    head :no_content
+  end
+  
+  
 end
